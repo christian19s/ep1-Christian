@@ -2,7 +2,6 @@ public class Turmas {
 	private String professor, sala, horario;
 	private int semestre, capAlunos;
 	private boolean isPresencial, isDisponivel;
-	private FormaAval formaAval;
 
 	public Turmas() {
 		this.professor = "";
@@ -10,7 +9,6 @@ public class Turmas {
 		this.horario = "";
 		this.semestre = 0;
 		this.capAlunos = 0;
-		this.formaAval = null;
 
 		if (isPresencial == false) {
 			sala = "";

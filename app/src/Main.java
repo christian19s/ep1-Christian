@@ -16,8 +16,19 @@ public class Main {
 		 * case 1:
 		 * }
 		 */
+		Scanner sc = new Scanner(System.in);
 
-		BancoDisciplinas bd = new BancoDisciplinas();
-		bd.printDisciplinas();
+		DisciplinasBanco discip = new DisciplinasBanco();
+
+		System.out.println("Digite o nome da disciplina: ");
+		String nome = sc.nextLine();
+		System.out.println("Digite o código da disciplina: ");
+		int codigo = sc.nextInt();
+		System.out.println("Digite a carga horária da disciplina em horas: ");
+		int cargaHor = sc.nextInt();
+
+		discip.addDisciplina(nome, codigo, cargaHor);
+
+		sc.close();
 	}
 }
