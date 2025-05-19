@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Turmas {
+public class Turmas extends Disciplinas {
 	private String professor, sala, modalidade, avaliacao;
 	private int semestre, capAlunos, quantAlunos, numTurma;
 
@@ -17,7 +17,7 @@ public class Turmas {
 	}
 
 	public Turmas(String professor, String sala, String modalidade, String avaliacao, int semestre, int capAlunos,
-			int quantAlunos) {
+			int quantAlunos, int numTurma) {
 		this.professor = professor;
 		this.sala = sala;
 		this.modalidade = modalidade;
@@ -114,8 +114,8 @@ public class Turmas {
 	}
 
 	// adicionar turmas
-	public void addTurmas(argumentos args) {
-		if (checkDispSala == true) {
+	public void addTurmas() {
+		if (checkDispSala() == true) {
 			AddFileTurmas fw = new AddFileTurmas();
 			numTurma++;
 			fw.salvarFile();

@@ -1,17 +1,81 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Disciplinas {
-	protected Alunos alunos = new Alunos();
+	protected String nome;
+	protected int codigo, cargaHor;
 
-	public void addAluno(Alunos alunos) {
-		alunos.setNome(alunos.nome);
-		alunos.setCurso(alunos.curso);
-		alunos.setMatricula(alunos.matricula);
+	List<Disciplinas> lista = new ArrayList<Disciplinas>();
+
+	public Disciplinas() {
+		this.nome = "";
+		this.codigo = 0;
+		// formas de avaliação
+
+		this.cargaHor = 0;
 	}
 
-	public void getInfo() {
-		System.out.println("Disciplina: " + nome);
-		System.out.println("Código: " + codigo);
-		System.out.println("Carga horária: " + cargaHor);
+	public Disciplinas(String nome, int codigo, int cargaHor) {
+		this.nome = nome;
+		this.codigo = codigo;
+		this.cargaHor = cargaHor;
 	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCargaHor(int cargaHor) {
+		this.cargaHor = cargaHor;
+	}
+
+	public int getCargaHor() {
+		return cargaHor;
+	}
+
+	@Override
+	public String toString() {
+		return getNome() + "," + getCodigo() + "," + getCargaHor() + "\n";
+	}
+
+	// append de file
+	public void salvarFile() {
+		try (FileWriter escritor = new FileWriter("../info/disciplinas.csv", true)) {
+			escritor.write(toString());
+			escritor.close();
+
+			System.out.println("Disciplina " + getNome() + " adicionada.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addDisciplina(String nom, int codig, int cargaH) {
+		setNome(nom);
+		setCodigo(codig);
+		setCargaHor(cargaH);
+		salvarFile();
+	}
+
+	// leitor de file
+
 }

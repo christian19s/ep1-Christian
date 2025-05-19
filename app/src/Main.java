@@ -18,7 +18,7 @@ public class Main {
 		 */
 		Scanner sc = new Scanner(System.in);
 
-		DisciplinasBanco discip = new DisciplinasBanco();
+		Disciplinas discip = new Disciplinas();
 
 		System.out.println("Digite o nome da disciplina: ");
 		String nome = sc.nextLine();
