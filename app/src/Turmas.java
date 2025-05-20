@@ -84,20 +84,7 @@ public class Turmas extends Disciplinas {
 		return quantAlunos;
 	}
 
-	BancoHorarios bh = new BancoHorarios();
-
-	public void setHorario(int d, String t) {
-		bh.setDias(d);
-		bh.setTempos(t);
-	}
-
-	public String getHorario() {
-		int i = bh.getDias();
-		String str = Integer.toString(i);
-		return str + " " + bh.getTempos();
-	}
-
-	// funções para cálculo de média
+	// cálculo de média
 	public float calcMediaA() {
 		return 0;
 	}
@@ -106,19 +93,23 @@ public class Turmas extends Disciplinas {
 		return 0;
 	}
 
+	// adicionar alunos
+	public void addAlunos(String matricula) {
+		ArrayList<Alunos> alunos = new ArrayList<>();
+
+		Alunos aluno = new Alunos();
+
+	}
+
 	// verifica se a sala está disponível no horário
 	// mexer aqui depois
 	public boolean checkDispSala(String sala, String horario) {
-
+		// verificar todas as linhas do arquivo turmas.csv e tentar igualar uma sala a
+		// um horario
 		return false;
 	}
 
 	// adicionar turmas
 	public void addTurmas() {
-		if (checkDispSala() == true) {
-			AddFileTurmas fw = new AddFileTurmas();
-			numTurma++;
-			fw.salvarFile();
-		}
 	}
 }

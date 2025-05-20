@@ -1,16 +1,15 @@
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Disciplinas {
 	protected String nome;
 	protected int codigo, cargaHor;
+	static int NUM_COL = 3;
 
 	List<Disciplinas> lista = new ArrayList<Disciplinas>();
 
@@ -69,11 +68,45 @@ public class Disciplinas {
 		}
 	}
 
+	// leitor de file
+	public void lerFile() {
+		try {
+			String COMMA = ",";
+			BufferedReader br = Files.newBufferedReader(Paths.get("../info/disciplinas.csv"));
+
+			String linha;
+
+			while ((linha = br.readLine()) != null) {
+				String[] tokens = linha.split(COMMA);
+				for (String token : tokens) {
+					System.out.println(token);
+				}
+			}
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// conversor de tokens para arrays de dados
+	public void converteToken(String tick) {
+		List<String> dados = new ArrayList<>();
+		int i = 0;
+		String oldTick = "";
+		for (i = 0; i <= 2; i++) {
+			oldTick = oldTick + tick;
+		}
+		dados.add(oldTick);
+		System.out.println(toString());
+	}
+
 	public void addDisciplina(String nom, int codig, int cargaH) {
 		setNome(nom);
 		setCodigo(codig);
 		setCargaHor(cargaH);
 		salvarFile();
+		Disciplinas discip = new Disciplinas(getNome(), getCodigo(), getCargaHor());
+		lista.add(discip);
 	}
 
 	// leitor de file
