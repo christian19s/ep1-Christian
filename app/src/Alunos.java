@@ -8,17 +8,20 @@ import java.nio.file.Paths;
 
 public class Alunos {
 	protected String nome, curso, matricula;
+	protected List<Disciplinas> disciplinas = new ArrayList<>();
 
 	public Alunos() {
 		this.nome = "";
 		this.curso = "";
 		this.matricula = "";
+		this.disciplinas = null;
 	}
 
-	public Alunos(String nome, String curso, String matricula) {
+	public Alunos(String nome, String curso, String matricula, List<Disciplinas> disciplinas) {
 		this.nome = nome;
 		this.curso = curso;
 		this.matricula = matricula;
+		this.disciplinas = disciplinas;
 	}
 
 	public void setNome(String nome) {
@@ -43,6 +46,10 @@ public class Alunos {
 
 	public String getMatricula() {
 		return matricula;
+	}
+
+	public void addAluno(int matricula) {
+		// loopar por todos os alunos e verificar se algum elemento já está na file
 	}
 
 	@Override
@@ -80,43 +87,6 @@ public class Alunos {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public List<String[]> procurarCodigo(String codigo) {
-		String COMMA = ",";
-		List<String[]> busca = new ArrayList<>();
-
-		try (BufferedReader br = Files.newBufferedReader(Paths.get("../info/disciplinas.csv"))) {
-			String linha;
-			while ((linha = br.readLine()) != null) {
-				String[] dados = linha.split(COMMA);
-				for (String valor : dados) {
-					if (valor.equalsIgnoreCase(codigo)) {
-						busca.add(dados);
-						break;
-					}
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return busca;
-	}
-
-	public void addDisciplinas(String codigo) {
-		List<String[]> buscar = procurarCodigo(codigo);
-		if (buscar.isEmpty()) {
-			System.out.println("Nenhum resultado encontrado.");
-		} else {
-			for (String[] linha : buscar) {
-				for (String valor : linha) {
-					System.out.print(valor + " | ");
-				}
-				System.out.println();
-			}
-		}
-
 	}
 
 	// adicionar matricula como argumento aqui

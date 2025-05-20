@@ -17,40 +17,40 @@ public class Main {
 		 * }
 		 */
 
+		Scanner sc = new Scanner(System.in);
+
+		Disciplinas discip = new Disciplinas();
+
+		System.out.println("Digite o nome da disciplina: ");
+		String nome = sc.nextLine();
+		System.out.println("Digite o código da disciplina: ");
+		String codigo = sc.nextLine();
+		System.out.println("Digite a carga horária da disciplina em horas: ");
+		String cargaHor = sc.nextLine();
+
+		discip.addDisciplina(nome, codigo, cargaHor);
+
+		sc.close();
+
+		discip.showInfo();
+
 		/*
 		 * Scanner sc = new Scanner(System.in);
 		 * 
-		 * Disciplinas discip = new Disciplinas();
+		 * Alunos alunos = new Alunos();
 		 * 
-		 * System.out.println("Digite o nome da disciplina: ");
+		 * System.out.println("Digite o nome do aluno: ");
 		 * String nome = sc.nextLine();
-		 * System.out.println("Digite o código da disciplina: ");
-		 * int codigo = sc.nextInt();
-		 * System.out.println("Digite a carga horária da disciplina em horas: ");
-		 * int cargaHor = sc.nextInt();
-		 * 
-		 * discip.addDisciplina(nome, codigo, cargaHor);
-		 * 
+		 * alunos.setNome(nome);
+		 * System.out.println("Digite a matrícula do aluno: ");
+		 * String matricula = sc.nextLine();
+		 * alunos.setMatricula(matricula);
+		 * System.out.println("Digite o curso do aluno: ");
+		 * String curso = sc.nextLine();
+		 * alunos.setCurso(curso);
+		 * alunos.salvarFile();
+		 * alunos.lerFile();
 		 * sc.close();
-		 * 
-		 * discip.lerFile();
 		 */
-
-		Scanner sc = new Scanner(System.in);
-
-		Alunos alunos = new Alunos();
-
-		System.out.println("Digite o nome do aluno: ");
-		String nome = sc.nextLine();
-		alunos.setNome(nome);
-		System.out.println("Digite a matrícula do aluno: ");
-		String matricula = sc.nextLine();
-		alunos.setMatricula(matricula);
-		System.out.println("Digite o curso do aluno: ");
-		String curso = sc.nextLine();
-		alunos.setCurso(curso);
-		alunos.salvarFile();
-		alunos.lerFile();
-		sc.close();
 	}
 }
