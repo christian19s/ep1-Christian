@@ -16,7 +16,6 @@ public class Main {
 		 * case 1:
 		 * }
 		 */
-
 		Scanner sc = new Scanner(System.in);
 
 		Disciplinas discip = new Disciplinas();
@@ -26,13 +25,17 @@ public class Main {
 		System.out.println("Digite o código da disciplina: ");
 		String codigo = sc.nextLine();
 		System.out.println("Digite a carga horária da disciplina em horas: ");
-		String cargaHor = sc.nextLine();
+		int cargaHor = Integer.parseInt(sc.nextLine());
 
 		discip.addDisciplina(nome, codigo, cargaHor);
 
-		sc.close();
-
 		discip.showInfo();
+
+		System.out.println("Digite o código da disciplina a ser buscada: ");
+		String cod = sc.nextLine();
+		discip.exibirDisciplina(cod);
+		sc.close();
+		System.out.println("fim");
 
 		/*
 		 * Scanner sc = new Scanner(System.in);

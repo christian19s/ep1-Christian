@@ -7,7 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Disciplinas {
-	protected String nome, codigo, cargaHor;
+	protected String nome, codigo;
+	protected int cargaHor;
+	protected final int maxPreReq = 3;
 	static int NUM_COL = 3;
 
 	List<Disciplinas> lista = new ArrayList<Disciplinas>();
@@ -15,10 +17,10 @@ public class Disciplinas {
 	public Disciplinas() {
 		this.nome = "";
 		this.codigo = "";
-		this.cargaHor = "";
+		this.cargaHor = 0;
 	}
 
-	public Disciplinas(String nome, String codigo, String cargaHor) {
+	public Disciplinas(String nome, String codigo, int cargaHor) {
 		this.nome = nome;
 		this.codigo = codigo;
 		this.cargaHor = cargaHor;
@@ -40,23 +42,27 @@ public class Disciplinas {
 		return codigo;
 	}
 
-	public void setCargaHor(String cargaHor) {
+	public void setCargaHor(int cargaHor) {
 		this.cargaHor = cargaHor;
 	}
 
-	public String getCargaHor() {
+	public int getCargaHor() {
 		return cargaHor;
 	}
 
-	@Override
-	public String toString() {
-		return getNome() + "," + getCodigo() + "," + getCargaHor() + "\n";
+	public String addBlank() {
+		String str = "";
+		for (int i = 1; i <= maxPreReq; i++) {
+			str = str + ",-";
+		}
+		return str;
 	}
 
 	// append de file
 	public void salvarFile() {
 		try (FileWriter escritor = new FileWriter("../info/disciplinas.csv", true)) {
-			escritor.write(toString());
+			String str = getNome() + "," + getCodigo() + "," + Integer.valueOf(getCargaHor()) + addBlank() + "\n";
+			escritor.write(str);
 			escritor.close();
 
 			System.out.println("Disciplina " + getNome() + " adicionada.");
@@ -85,21 +91,16 @@ public class Disciplinas {
 		return infoArray;
 	}
 
-	public void addDisciplina(String nom, String codig, String cargaH) {
+	public void addDisciplina(String nom, String codig, int cargaH) {
 		setNome(nom);
 		setCodigo(codig);
 		setCargaHor(cargaH);
 		salvarFile();
-		Disciplinas discip = new Disciplinas(getNome(), getCodigo(), getCargaHor());
-		lista.add(discip);
 	}
-
-	// leitor de file
 
 	public void showInfo() {
 		ArrayList<String[]> disciplinas = lerFile();
 
-		// Exemplo de como acessar os dados
 		for (String[] disciplina : disciplinas) {
 			System.out.println("Nome: " + disciplina[0]);
 			System.out.println("Código: " + disciplina[1]);
@@ -108,20 +109,58 @@ public class Disciplinas {
 		}
 	}
 
-	private int contarDisciplinas() {
-		int count = 0;
-		return count;
-	}
-
-	public void preRequisitos() {
-		// loopar por todos os elementos da file disciplinas e add prerequisitos com
-		// base no codigo da disciplina
+	public String[] addPreRequisitos(String codigo, String[] codPre) {
+		// ler linha da disciplina e substituir uma linha branca por prereq por passada
+		// buscar prerequisitos pelo codigo usando outra funcao
+		List<String[]> lista = procuraDisciplina(codigo);
+		String[] preReq;
+		if (lista.contains("-") == true) {
+			int index = lista.indexOf("-");
+			lista.set(index, codPre);
+			int newIndex = lista.indexOf(codPre);
+			preReq = lista.get(newIndex);
+			return preReq;
+		} else {
+			preReq = null;
+			return preReq;
+		}
 	}
 
 	// função para retornar info sobre uma disciplina específica passando código
 	// como argumento
+	public List<String[]> procuraDisciplina(String codigo) {
+		List<String[]> busca = new ArrayList<>();
+		final String COMMA = ",";
 
-	public void showDisciplina(String codigo) {
+		try (BufferedReader br = Files.newBufferedReader(Paths.get("../info/disciplinas.csv"))) {
+			String linha;
+			while ((linha = br.readLine()) != null) {
+				String[] dados = linha.split(COMMA);
+				for (String valor : dados) {
+					if (valor.equalsIgnoreCase(codigo)) {
+						busca.add(dados);
+						break;
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return busca;
+	}
 
+	public void exibirDisciplina(String codigo) {
+		List<String[]> resultados = procuraDisciplina(codigo);
+
+		for (String[] linha : resultados) {
+			String nome = linha[0]; // nome da disciplina
+			String cod = linha[1]; // código
+			String cargaHoraria = linha[2]; // carga horária
+
+			System.out.printf(
+					"Nome: %s | Código: %s | Carga Horária: %s%n",
+					nome, cod, cargaHoraria);
+		}
+		resultados = null;
 	}
 }

@@ -92,4 +92,7 @@ public class Alunos {
 	// adicionar matricula como argumento aqui
 	public void showInfo() {
 	}
+
+	public void showDisciplinas(String matricula) {
+	}
 }
