@@ -5,11 +5,12 @@ import java.util.List;
 import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class Disciplinas {
 	protected String nome, codigo;
 	protected int cargaHor;
-	protected final int maxPreReq = 3;
+	protected int quantPreReq = 3;
 	static int NUM_COL = 3;
 
 	List<Disciplinas> lista = new ArrayList<Disciplinas>();
@@ -50,56 +51,15 @@ public class Disciplinas {
 		return cargaHor;
 	}
 
-	public String addBlank() {
-		String str = "";
-		for (int i = 1; i <= maxPreReq; i++) {
-			str = str + ",-";
-		}
-		return str;
-	}
-
-	// append de file
-	public void salvarFile() {
-		try (FileWriter escritor = new FileWriter("../info/disciplinas.csv", true)) {
-			String str = getNome() + "," + getCodigo() + "," + Integer.valueOf(getCargaHor()) + addBlank() + "\n";
-			escritor.write(str);
-			escritor.close();
-
-			System.out.println("Disciplina " + getNome() + " adicionada.");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// leitor de file
-	public ArrayList<String[]> lerFile() {
-		ArrayList<String[]> infoArray = new ArrayList<>();
-
-		try (BufferedReader br = Files.newBufferedReader(Paths.get("../info/disciplinas.csv"))) {
-			String COMMA = ",";
-			String linha;
-			while ((linha = br.readLine()) != null) {
-				String[] tokens = linha.split(COMMA);
-				infoArray.add(tokens);
-			}
-			// remover essa linha
-
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return infoArray;
-	}
-
 	public void addDisciplina(String nom, String codig, int cargaH) {
 		setNome(nom);
 		setCodigo(codig);
 		setCargaHor(cargaH);
-		salvarFile();
+		ConfigCSV.salvarFile(getNome(), getCodigo(), getCargaHor(), "../info/disciplinas.csv");
 	}
 
 	public void showInfo() {
-		ArrayList<String[]> disciplinas = lerFile();
+		ArrayList<String[]> disciplinas = ConfigCSV.lerFile("../info/disciplinas.csv");
 
 		for (String[] disciplina : disciplinas) {
 			System.out.println("Nome: " + disciplina[0]);
@@ -109,25 +69,6 @@ public class Disciplinas {
 		}
 	}
 
-	public String[] addPreRequisitos(String codigo, String[] codPre) {
-		// ler linha da disciplina e substituir uma linha branca por prereq por passada
-		// buscar prerequisitos pelo codigo usando outra funcao
-		List<String[]> lista = procuraDisciplina(codigo);
-		String[] preReq;
-		if (lista.contains("-") == true) {
-			int index = lista.indexOf("-");
-			lista.set(index, codPre);
-			int newIndex = lista.indexOf(codPre);
-			preReq = lista.get(newIndex);
-			return preReq;
-		} else {
-			preReq = null;
-			return preReq;
-		}
-	}
-
-	// função para retornar info sobre uma disciplina específica passando código
-	// como argumento
 	public List<String[]> procuraDisciplina(String codigo) {
 		List<String[]> busca = new ArrayList<>();
 		final String COMMA = ",";
@@ -150,12 +91,12 @@ public class Disciplinas {
 	}
 
 	public void exibirDisciplina(String codigo) {
-		List<String[]> resultados = procuraDisciplina(codigo);
+		List<String[]> resultados = ConfigCSV.procuraFile("../info/disciplinas.csv", codigo);
 
 		for (String[] linha : resultados) {
-			String nome = linha[0]; // nome da disciplina
-			String cod = linha[1]; // código
-			String cargaHoraria = linha[2]; // carga horária
+			String nome = linha[0];
+			String cod = linha[1];
+			String cargaHoraria = linha[2];
 
 			System.out.printf(
 					"Nome: %s | Código: %s | Carga Horária: %s%n",

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Main {
 	public static void main(String[] args) {
@@ -29,6 +30,11 @@ public class Main {
 
 		discip.addDisciplina(nome, codigo, cargaHor);
 
+		try {
+			ConfigCSV.updateCSV("../info/disciplinas.csv", "MAT-3456", "you got replaced");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		discip.showInfo();
 
 		System.out.println("Digite o código da disciplina a ser buscada: ");

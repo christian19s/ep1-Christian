@@ -32,4 +32,14 @@ public class Config {
 
 		return panel;
 	}
+
+	public static JTextField createTextField(String text, Dimension dimension) {
+		JTextField input = new JTextField();
+
+		input.setPreferredSize(dimension);
+		input.setText(text);
+		input.setFont(new Font("Default", Font.BOLD, 20));
+
+		return input;
+	}
 }
