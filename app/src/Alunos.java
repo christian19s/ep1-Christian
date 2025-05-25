@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -8,20 +11,17 @@ import java.nio.file.Paths;
 
 public class Alunos {
 	protected String nome, curso, matricula;
-	protected List<Disciplinas> disciplinas = new ArrayList<>();
 
 	public Alunos() {
 		this.nome = "";
 		this.curso = "";
 		this.matricula = "";
-		this.disciplinas = null;
 	}
 
 	public Alunos(String nome, String curso, String matricula, List<Disciplinas> disciplinas) {
 		this.nome = nome;
 		this.curso = curso;
 		this.matricula = matricula;
-		this.disciplinas = disciplinas;
 	}
 
 	public void setNome(String nome) {
@@ -48,8 +48,26 @@ public class Alunos {
 		return matricula;
 	}
 
-	public void addAluno(int matricula) {
-		// loopar por todos os alunos e verificar se algum elemento já está na file
+	public void addAluno(String nome, String matricula, String curso, String PATH) {
+		try {
+			boolean matriculaExiste = false;
+
+			for (String[] aluno : ConfigCSV.procuraFile(PATH, matricula)) {
+				if (aluno.length > 1 && aluno[1].equals(matricula)) {
+					matriculaExiste = true;
+					break;
+				}
+			}
+
+			if (!matriculaExiste) {
+				ConfigCSV.salvarFile(nome, matricula, curso, PATH);
+				JOptionPane.showMessageDialog(null, "Aluno " + nome + " adicionado(a).");
+			} else {
+				throw new IOException("Erro: Matrícula duplicada!");
+			}
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	@Override
@@ -57,42 +75,7 @@ public class Alunos {
 		return getNome() + "," + getMatricula() + "," + getCurso() + "\n";
 	}
 
-	public void salvarFile() {
-		try (FileWriter escritor = new FileWriter("../info/alunos.csv", true)) {
-			escritor.write(toString());
-			escritor.close();
-
-			System.out.println("Aluno " + getNome() + " adicionado(a).");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// leitor de file
-	public void lerFile() {
-		try {
-			String COMMA = ",";
-			BufferedReader br = Files.newBufferedReader(Paths.get("../info/alunos.csv"));
-
-			String linha;
-
-			while ((linha = br.readLine()) != null) {
-				String[] tokens = linha.split(COMMA);
-
-				for (String token : tokens) {
-					System.out.println(token);
-				}
-			}
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// adicionar matricula como argumento aqui
 	public void showInfo() {
 	}
 
-	public void showDisciplinas(String matricula) {
-	}
 }

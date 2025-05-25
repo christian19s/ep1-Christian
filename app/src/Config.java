@@ -4,9 +4,9 @@ import java.awt.FlowLayout;
 
 public class Config {
 
-	public static JFrame createFrame(String title, Dimension dimension, Color bg) {
+	public static JFrame createFrame(String title, Color bg) {
 		JFrame frame = new JFrame();
-		frame.setSize(dimension);
+		frame.setSize(new Dimension(1200, 800));
 		frame.getContentPane().setBackground(bg);
 		frame.setTitle(title);
 		frame.setResizable(false);
@@ -38,7 +38,7 @@ public class Config {
 
 		input.setPreferredSize(dimension);
 		input.setText(text);
-		input.setFont(new Font("Default", Font.BOLD, 20));
+		input.setFont(new Font("Default", Font.BOLD, 10));
 
 		return input;
 	}

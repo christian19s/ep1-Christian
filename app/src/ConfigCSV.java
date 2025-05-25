@@ -6,7 +6,39 @@ public class ConfigCSV {
 
 	public static void salvarFile(String str1, String str2, int num, String PATH) {
 		try (FileWriter escritor = new FileWriter(PATH, true)) {
-			String str = str1 + "," + str2 + "," + Integer.valueOf(num) + ",-" + ",-" + ",-," + "\n";
+			String str = str1 + "," + str2 + "," + Integer.valueOf(num) + ",-" + "\n";
+			escritor.write(str);
+			escritor.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void salvarFile(String str1, String str2, String str3, String PATH) {
+		try (FileWriter escritor = new FileWriter(PATH, true)) {
+			String str = str1 + "," + str2 + "," + str3 + "\n";
+			escritor.write(str);
+			escritor.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static String addBlank(int num) {
+		String str = "";
+		for (int i = 1; i <= num; i++) {
+			str = str + ",-";
+		}
+		return str;
+	}
+
+	public static void salvarFile(int nTur, String discip, String prof, String sala, String mod, String aval,
+			String hor, String sem,
+			int capAlunos, String PATH) {
+		try (FileWriter escritor = new FileWriter(PATH, true)) {
+			String str = Integer.valueOf(nTur) + "," + discip + "," + prof + "," + sala + "," + mod + "," + aval + ","
+					+ hor + ","
+					+ sem + addBlank(capAlunos) + "\n";
 			escritor.write(str);
 			escritor.close();
 		} catch (IOException e) {
@@ -54,23 +86,24 @@ public class ConfigCSV {
 	public static void updateCSV(String PATH, String emptyLine, String... values) throws IOException {
 		try {
 			List<String> lines = Files.readAllLines(Paths.get(PATH));
-			int targetRow = 0;
+			int targetRow = -1;
 			for (int i = 0; i < lines.size(); i++) {
-				String[] columns = lines.get(i).split(",");
+				String[] columns = lines.get(i).split(",", -1);
 
 				if (columns.length > 1 &&
 						columns[1].trim().equalsIgnoreCase(emptyLine)) {
 					targetRow = i;
+					break;
 				}
 			}
-			if (targetRow < 0 || targetRow >= lines.size()) {
+			if (targetRow == -1) {
 				throw new IllegalArgumentException("Linha inválida: " + targetRow);
 			}
-			String[] columns = lines.get(targetRow).split(",");
+			String[] columns = lines.get(targetRow).split(",", -1);
 			int valueIndex = 0;
 			for (int i = 0; i < columns.length && valueIndex < values.length; i++) {
 				if (columns[i].trim().equals("-")) {
-					columns[i] = values[valueIndex++];
+					columns[i] = values[valueIndex++].replace(",", "");
 				}
 			}
 			lines.set(targetRow, String.join(",", columns));

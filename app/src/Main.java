@@ -29,12 +29,7 @@ public class Main {
 		int cargaHor = Integer.parseInt(sc.nextLine());
 
 		discip.addDisciplina(nome, codigo, cargaHor);
-
-		try {
-			ConfigCSV.updateCSV("../info/disciplinas.csv", "MAT-3456", "you got replaced");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		discip.addPreReq("MAT-1234", "MAT-2345");
 		discip.showInfo();
 
 		System.out.println("Digite o código da disciplina a ser buscada: ");

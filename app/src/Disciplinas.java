@@ -58,6 +58,14 @@ public class Disciplinas {
 		ConfigCSV.salvarFile(getNome(), getCodigo(), getCargaHor(), "../info/disciplinas.csv");
 	}
 
+	public void addPreReq(String cod, String codPre) {
+		try {
+			ConfigCSV.updateCSV("../info/disciplinas.csv", cod, codPre);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void showInfo() {
 		ArrayList<String[]> disciplinas = ConfigCSV.lerFile("../info/disciplinas.csv");
 

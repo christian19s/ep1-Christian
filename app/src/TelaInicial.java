@@ -20,7 +20,7 @@ public class TelaInicial implements ActionListener {
 	JButton btn3 = Config.createButton("Modo Avaliação", new Dimension(500, 80), new Color(255, 255, 255));
 	JButton btn4 = Config.createButton("Sair", new Dimension(500, 80), new Color(255, 0, 0));
 
-	JFrame frame = Config.createFrame("Gerenciador de Alunos", new Dimension(1200, 800), new Color(0, 58, 112));
+	JFrame frame = Config.createFrame("Gerenciador de Alunos", new Color(0, 58, 112));
 	JPanel panel = Config.createPanel(new Dimension(800, 800), new Color(0, 132, 61));
 
 	TelaInicial() {
@@ -42,7 +42,7 @@ public class TelaInicial implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == btn1) {
-			TelaDisciplinas td = new TelaDisciplinas();
+			TelaAlunos ta = new TelaAlunos();
 			frame.dispose();
 		}
 		if (evt.getSource() == btn2) {

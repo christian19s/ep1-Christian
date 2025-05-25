@@ -95,9 +95,6 @@ public class Turmas extends Disciplinas {
 
 	// adicionar alunos
 	public void addAlunos(String matricula) {
-		ArrayList<Alunos> alunos = new ArrayList<>();
-
-		Alunos aluno = new Alunos();
 
 	}
 
