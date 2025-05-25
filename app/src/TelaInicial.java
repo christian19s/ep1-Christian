@@ -23,7 +23,7 @@ public class TelaInicial implements ActionListener {
 	JFrame frame = Config.createFrame("Gerenciador de Alunos", new Color(0, 58, 112));
 	JPanel panel = Config.createPanel(new Dimension(800, 800), new Color(0, 132, 61));
 
-	TelaInicial() {
+	public TelaInicial() {
 
 		btn1.addActionListener(this);
 		btn2.addActionListener(this);

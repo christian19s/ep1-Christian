@@ -10,6 +10,10 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import java.util.List;
+import javax.swing.JSlider;
+import java.awt.FlowLayout;
+import java.io.IOException;
 
 public class TelaAlunos implements ActionListener {
 	Alunos alunos = new Alunos();
@@ -87,20 +91,30 @@ public class TelaAlunos implements ActionListener {
 			newFrame.add(text3);
 			newFrame.add(btn);
 			newFrame.add(btn2, BorderLayout.PAGE_END);
+			newFrame.pack();
 			newFrame.setVisible(true);
 		}
+
 		if (evt.getSource() == btn2) {
-			JFrame newFrame = Config.createFrame("Cadastrar pré-requisitos",
+			JFrame newFrame = Config.createFrame("Editar aluno",
 					new Color(0, 58, 112));
-			JTextField text1 = Config.createTextField("Código da disciplina", new Dimension(200, 30));
-			JTextField text2 = Config.createTextField("Código do pré-requisito", new Dimension(200, 30));
+			JTextField text1 = Config.createTextField("Matrícula antiga", new Dimension(200, 30));
+			JTextField text2 = Config.createTextField("Novo nome", new Dimension(200, 30));
+			JTextField text3 = Config.createTextField("Nova matrícula", new Dimension(200, 30));
+			JTextField text4 = Config.createTextField("Novo curso", new Dimension(200, 30));
 
 			JButton btn = Config.createButton("Submeter", new Dimension(150, 30), new Color(0, 132, 61));
 			JButton btn2 = Config.createButton("Voltar", new Dimension(150, 30), new Color(255, 0, 0));
+			// Componentes
 
 			btn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					String str1 = text1.getText();
+					String str2 = text2.getText();
+					String str3 = text3.getText();
+					String str4 = text4.getText();
+					boolean sub = alunos.editarAluno("../info/alunos.csv", str1, str2, str3, str4);
 					newFrame.dispose();
 				}
 			});
@@ -110,13 +124,30 @@ public class TelaAlunos implements ActionListener {
 					newFrame.dispose();
 				}
 			});
-
 			newFrame.add(text1);
 			newFrame.add(text2);
+			newFrame.add(text3);
+			newFrame.add(text4);
 			newFrame.add(btn);
 			newFrame.add(btn2);
+			newFrame.pack();
 			newFrame.setVisible(true);
 
+		}
+		if (evt.getSource() == btn3) {
+			JFrame newFrame = Config.createFrame("Lista de Alunos",
+					new Color(0, 58, 112));
+
+			JButton btn2 = Config.createButton("Voltar", new Dimension(150, 30), new Color(255, 0, 0));
+
+			btn2.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					newFrame.dispose();
+				}
+			});
+
+			newFrame.setVisible(true);
 		}
 		if (evt.getSource() == btn7) {
 			TelaInicial ti = new TelaInicial();

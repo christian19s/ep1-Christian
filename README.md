@@ -19,13 +19,13 @@ O enunciado do trabalho pode ser encontrado aqui:
 ## Instruções para Compilação e Execução
 
 1. **Compilação:**  
-   [Descrever aqui como compilar o projeto. Exemplo: `javac Main.java` ou o script usado]
+javac -cp ../bin -d ../bin *.java
 
 2. **Execução:**  
-   [Descrever aqui como executar o projeto. Exemplo: `java Main` ou o script usado]
+java -cp ../bin Main.java
 
 3. **Estrutura de Pastas:**  
-   [Descrever aqui as principais pastas do projeto]
+
 
 3. **Versão do JAVA utilizada:**  
    java 21

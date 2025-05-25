@@ -22,8 +22,6 @@ public class TelaDisciplinas implements ActionListener {
 	JButton btn2 = Config.createButton("Criar turmas", new Dimension(400, 60), Color.white);
 	JButton btn3 = Config.createButton("Listar turmas disponíveis", new Dimension(400, 60), Color.white);
 	JButton btn4 = Config.createButton("Listar alunos por turma", new Dimension(400, 60), Color.white);
-	JButton btn5 = Config.createButton("Salvar dados", new Dimension(400, 60), Color.white);
-	JButton btn6 = Config.createButton("Carregar dados", new Dimension(400, 60), Color.white);
 	JButton btn7 = Config.createButton("Voltar", new Dimension(400, 60), Color.red);
 
 	JFrame frame = Config.createFrame("Modo Disciplinas", new Color(0, 58, 112));
@@ -39,8 +37,6 @@ public class TelaDisciplinas implements ActionListener {
 		btn2.addActionListener(this);
 		btn3.addActionListener(this);
 		btn4.addActionListener(this);
-		btn5.addActionListener(this);
-		btn6.addActionListener(this);
 		btn7.addActionListener(this);
 
 		panel.add(title, BorderLayout.CENTER);
@@ -49,8 +45,6 @@ public class TelaDisciplinas implements ActionListener {
 		panel.add(btn2);
 		panel.add(btn3);
 		panel.add(btn4);
-		panel.add(btn5);
-		panel.add(btn6);
 		panel.add(btn7);
 		frame.add(panel);
 		frame.setVisible(true);
@@ -91,6 +85,7 @@ public class TelaDisciplinas implements ActionListener {
 			newFrame.add(text3);
 			newFrame.add(btn);
 			newFrame.add(btn2, BorderLayout.PAGE_END);
+			newFrame.pack();
 			newFrame.setVisible(true);
 		}
 		if (evt.getSource() == btn8) {
@@ -123,6 +118,7 @@ public class TelaDisciplinas implements ActionListener {
 			newFrame.add(text2);
 			newFrame.add(btn);
 			newFrame.add(btn2);
+			newFrame.pack();
 			newFrame.setVisible(true);
 
 		}
