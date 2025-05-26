@@ -20,12 +20,17 @@ O enunciado do trabalho pode ser encontrado aqui:
 
 1. **Compilação:**  
 javac -cp ../bin -d ../bin *.java
+No diretório src
 
-2. **Execução:**  
+3. **Execução:**  
 java -cp ../bin Main.java
+No diretório src
 
-3. **Estrutura de Pastas:**  
-
+5. **Estrutura de Pastas:**  
+src: onde os arquivos .java ficam
+bin: onde os binários ficarão
+info: onde os arquivos com informações gerais ficam
+assets: onde os assets usados no projeto ficam
 
 3. **Versão do JAVA utilizada:**  
    java 21
@@ -34,17 +39,17 @@ java -cp ../bin Main.java
 
 ## Vídeo de Demonstração
 
-- [Inserir o link para o vídeo no YouTube/Drive aqui]
+- [https://drive.google.com/file/d/1OpsfTetgFUKLw96t96PxMYVpVVQdPhFE/view?usp=drive_link]
 
 ---
 
 ## Prints da Execução
 
 1. Menu Principal:  
-   ![Inserir Print 1](caminho/do/print1.png)
+   ![https://drive.google.com/file/d/1sTx5BT04satJ2x3H1zCGl1HMfGPV-gcy/view?usp=drive_link]
 
 2. Cadastro de Aluno:  
-   ![Inserir Print 2](caminho/do/print2.png)
+   ![https://drive.google.com/file/d/1nFRh6RD9tHUhTypPpQFO5ntFaKtlCEkr/view?usp=drive_link]
 
 3. Relatório de Frequência/Notas:  
    ![Inserir Print 3](caminho/do/print3.png)
@@ -55,19 +60,19 @@ java -cp ../bin Main.java
 
 - [ ] Cadastro, listagem, matrícula e trancamento de alunos (Normais e Especiais)
 - [ ] Cadastro de disciplinas e criação de turmas (presenciais e remotas)
-- [ ] Matrícula de alunos em turmas, respeitando vagas e pré-requisitos
+- [X] Matrícula de alunos em turmas, respeitando vagas e pré-requisitos
 - [ ] Lançamento de notas e controle de presença
 - [ ] Cálculo de média final e verificação de aprovação/reprovação
 - [ ] Relatórios de desempenho acadêmico por aluno, turma e disciplina
-- [ ] Persistência de dados em arquivos (.txt ou .csv)
-- [ ] Tratamento de duplicidade de matrículas
-- [ ] Uso de herança, polimorfismo e encapsulamento
+- [X] Persistência de dados em arquivos (.txt ou .csv)
+- [X] Tratamento de duplicidade de matrículas
+- [X] Uso de herança, polimorfismo e encapsulamento
 
 ---
 
 ## Observações (Extras ou Dificuldades)
 
-- [Espaço para o aluno comentar qualquer funcionalidade extra que implementou, dificuldades enfrentadas, ou considerações importantes.]
+- O projeto não foi finalizado. Muitas funções não foram implementadas, pois não tive um bom gerenciamento de tempo e foquei demais em problemas como file management. A interface gráfica foi iniciada. Tive dificuldades na organização do código, pois demorei demais para entender que métodos acessores de files deveriam ser generalizados e contidos em classes separadas, assim como configurações padrão para objetos na interface gráfica como JFrame deveriam ficar em classe separadas também. Algumas funções foram criadas e nunca utilizadas, como a função de listar alunos. No geral, o projeto poderia ter sido finalizado caso eu tivesse lidado melhor com o tempo.
 
 ---
 
